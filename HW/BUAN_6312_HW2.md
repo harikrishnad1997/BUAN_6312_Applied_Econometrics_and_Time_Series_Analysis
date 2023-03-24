@@ -37,7 +37,7 @@ $$
 
 $$ ecobuy = 0.4236865 + -0.8026219 \times ecoprc + 0.7192675 \times regprc + 0.0005518 \times faminc + 0.0238227 \times hhsize + 0.0247849 \times educ - 0.0005008 \times age + u $$
 
-<p> From the following equation, we can see that co-effiecient of </p>
+<p> From the following equation, we can see that coefficients of <i>ecoprc</i> and <i>regprc</i> are <i>0.803</i> and <i>0.719</i>. The p-values of these coefficients are less than 0.05, therefore they are statistically significant. </p>
 
 ```{STATA}
 
