@@ -67,7 +67,21 @@ $$ ecobuy = 0.4236865 + -0.8026219 \times ecoprc + 0.7192675 \times regprc + 0.0
 
 * Are the nonprice variables jointly significant in the LPM? (Use the usual F statistic, even though it is not valid when there is heteroskedasticity.) Which explanatory variable other than the price variables seems to have the most significant effect on the decision to buy ecolabeled apples? Does this make sense to you?
 
-<p> Answer here </p>
+<p> We can see that we conduct a hypothesis tests on the non price variables gives us a <i>p_value < 0.05</i>. Therefore, we can reject the null hypothesis i.e. non-price variables are jointly significant. As <i>t(educ) = 2.96</i> is the highest t statistic value among the non price variable, we can conclude that <i>education</i> makes most significant effect on purchase of eco-labeled apples. This makes sense that educated customers would prefer ecolabeled apples as they would be more well equipped in understanding the benefit of the consumption of them.</p>
+
+```{STATA}
+
+. test faminc hhsize educ age
+
+ ( 1)  faminc = 0
+ ( 2)  hhsize = 0
+ ( 3)  educ = 0
+ ( 4)  age = 0
+
+       F(  4,   653) =    4.43
+            Prob > F =    0.0015
+
+```
 
 
 * In the model from part (ii), replace $faminc$ with $log(faminc)$. Given the $R^2$, which model fits the data better? How many estimated probabilities are negative? How many are bigger than one? Should you be concerned? [Hint: Use command predict y to generate fitted values.]
