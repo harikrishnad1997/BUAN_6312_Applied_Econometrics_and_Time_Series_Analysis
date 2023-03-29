@@ -6,7 +6,7 @@
 
 * Define a binary variable as ecobuy = 1 if ecolbs > 0 and ecobuy = 0 if ecolbs = 0. In other words, ecobuy indicates whether, at the prices given, a family would buy any ecologically friendly apples. What fraction of families claim they would buy ecolabeled apples?
 
-<p>The fraction of fammilies claim they would buy ecolabeled apples are 62.42% </p>
+<p>The fraction of families claim they would buy ecolabeled apples are 62.42% </p>
 
 ```{STATA}
 
