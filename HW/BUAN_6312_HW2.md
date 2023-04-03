@@ -117,13 +117,13 @@ $$ ecobuy = 0.4236865 + -0.8026219 \times ecoprc + 0.7192675 \times regprc + 0.0
 
 * Regress log(uclms) on a monthly linear time trend and 11 monthly dummy variables. [Hint: Use jan as the base month for the monthly dummy variables.]What was the overall trend in unemployment claims over this period? (Interpret the coefficient on the time trend.) Is there evidence of seasonality in unemployment claims?
 
-<p> Answer here </p>
+<p> </p>
 
 * Add ez, a dummy variable equal to one in the months Anderson had an EZ, to the regression in part (i). Does having the enterprise zone seem to decrease unemployment claims? By how much?
 
 <p> Answer here </p>
 
-* 	Now use Δlog⁡(invpc_t) as the dependent variable. Re-run the equation and report the results in standard form. How do your results of the coefficient β ̂_1 change from part (ii)? Is the time trend still significant? Why or why not?
+* Now use Δlog⁡(invpc_t) as the dependent variable. Re-run the equation and report the results in standard form. How do your results of the coefficient β ̂_1 change from part (ii)? Is the time trend still significant? Why or why not?
 
 <p> Answer here </p>
 
