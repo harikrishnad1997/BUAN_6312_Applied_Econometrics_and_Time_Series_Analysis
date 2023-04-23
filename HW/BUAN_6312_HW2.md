@@ -113,20 +113,172 @@ $$ ecobuy = 0.4236865 + -0.8026219 \times ecoprc + 0.7192675 \times regprc + 0.0
 
 ```
 
+<p>We see that the <i>Adj-R sqr</i> of the second model is greater in the first model. This indicates that the second model fits better. In the second model, there are two fitted probabilities are above 1 and in the range of 0.185 to 1.051. The two values aren't of concern as the source has 660 observations and the values are very close to 1. There are no negative probabilities.</p>
+
 2. Use the data in EZANDERS for this exercise. The data are on monthly unemployment claims in Anderson Township in Indiana, from January 1980 through November 1988. In 1984, an enterprise zone (EZ) was located in Anderson (as well as other cities in Indiana). 
 
 * Regress log(uclms) on a monthly linear time trend and 11 monthly dummy variables. [Hint: Use jan as the base month for the monthly dummy variables.]What was the overall trend in unemployment claims over this period? (Interpret the coefficient on the time trend.) Is there evidence of seasonality in unemployment claims?
 
-<p> </p>
+```{STATA}
+
+. use "C:\Users\hxd220000\Desktop\Data Sets- STATA\EZANDERS.DTA" 
+
+. regress luclms year feb mar apr may jun jul aug sep oct nov dec
+
+      Source |       SS           df       MS      Number of obs   =       107
+-------------+----------------------------------   F(12, 94)       =     14.36
+       Model |  27.0363482        12  2.25302901   Prob > F        =    0.0000
+    Residual |  14.7491008        94  .156905327   R-squared       =    0.6470
+-------------+----------------------------------   Adj R-squared   =    0.6020
+       Total |  41.7854489       106  .394202348   Root MSE        =    .39611
+
+------------------------------------------------------------------------------
+      luclms | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        year |  -.1665437   .0149503   -11.14   0.000    -.1962279   -.1368595
+         feb |  -.0132261   .1867294    -0.07   0.944    -.3839816    .3575294
+         mar |  -.0661643   .1867294    -0.35   0.724    -.4369198    .3045912
+         apr |  -.3649279   .1867294    -1.95   0.054    -.7356834    .0058276
+         may |  -.5147779   .1867294    -2.76   0.007    -.8855334   -.1440224
+         jun |  -.5541234   .1867294    -2.97   0.004    -.9248789   -.1833679
+         jul |  -.5191558   .1867294    -2.78   0.007    -.8899113   -.1484003
+         aug |  -.3378477   .1867294    -1.81   0.074    -.7086032    .0329078
+         sep |  -.7528584   .1867294    -4.03   0.000    -1.123614   -.3821029
+         oct |  -.7867943   .1867294    -4.21   0.000     -1.15755   -.4160388
+         nov |  -.6816665   .1867294    -3.65   0.000    -1.052422    -.310911
+         dec |  -.3740492   .1926213    -1.94   0.055    -.7565034    .0084049
+       _cons |   339.4264   29.66172    11.44   0.000     280.5323    398.3204
+------------------------------------------------------------------------------
+
+```
+
+<p>We see that coefficient of <b>YEAR</b> is <i>-0.1665</i>. This implies that the overall trend of unemployment claims decreases by <i>16.65%</i> per year. As the p-value < threshold value, we can conclude that the yearly trend is significant.</p>
+
+<p>We can see that some of the monthly dummy variables are significant at a 5% level of significance, whereas some are not significant at the same threshold. This helps us understand that there is a presence of seasonal factors behind unemplyment claims.</p>
+
+<p>To confirm the joint significance, we perform the Wald test on the 11 monthly dummy variables. </p>
+
+$$H_0: {feb - dec} = 0$$
+$$H_1: {feb - dec} \neq 0$$
+
+```{STATA}
+. test feb mar apr may jun jul aug sep oct nov dec
+
+ ( 1)  feb = 0
+ ( 2)  mar = 0
+ ( 3)  apr = 0
+ ( 4)  may = 0
+ ( 5)  jun = 0
+ ( 6)  jul = 0
+ ( 7)  aug = 0
+ ( 8)  sep = 0
+ ( 9)  oct = 0
+ (10)  nov = 0
+ (11)  dec = 0
+
+       F( 11,    94) =    4.32
+            Prob > F =    0.0000
+```
+
+<p>As the p-value < threshold, we can reject the null hypothesis. Therefore, we can conclude that the monthly dummy variables are jointly significant.</p>
 
 * Add ez, a dummy variable equal to one in the months Anderson had an EZ, to the regression in part (i). Does having the enterprise zone seem to decrease unemployment claims? By how much?
 
-<p> Answer here </p>
+```{STATA}
+
+. regress luclms year feb mar apr may jun jul aug sep oct nov dec ez
+
+      Source |       SS           df       MS      Number of obs   =       107
+-------------+----------------------------------   F(13, 93)       =     15.76
+       Model |  28.7422487        13  2.21094221   Prob > F        =    0.0000
+    Residual |  13.0432002        93  .140249465   R-squared       =    0.6879
+-------------+----------------------------------   Adj R-squared   =    0.6442
+       Total |  41.7854489       106  .394202348   Root MSE        =     .3745
+
+------------------------------------------------------------------------------
+      luclms | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        year |  -.0811489   .0282722    -2.87   0.005    -.1372918    -.025006
+         feb |  -.0132261   .1765405    -0.07   0.940    -.3638005    .3373484
+         mar |  -.0661643   .1765405    -0.37   0.709    -.4167388    .2844101
+         apr |  -.3649279   .1765405    -2.07   0.042    -.7155023   -.0143534
+         may |  -.5147779   .1765405    -2.92   0.004    -.8653523   -.1642034
+         jun |  -.5541234   .1765405    -3.14   0.002    -.9046978    -.203549
+         jul |  -.5191558   .1765405    -2.94   0.004    -.8697303   -.1685814
+         aug |  -.3378477   .1765405    -1.91   0.059    -.6884222    .0127267
+         sep |  -.7528584   .1765405    -4.26   0.000    -1.103433   -.4022839
+         oct |  -.7867943   .1765405    -4.46   0.000    -1.137369   -.4362198
+         nov |  -.6816665   .1765405    -3.86   0.000    -1.032241   -.3310921
+         dec |  -.3595756   .1821582    -1.97   0.051    -.7213057    .0021546
+          ez |  -.5080266   .1456667    -3.49   0.001    -.7972917   -.2187614
+       _cons |   170.2854   56.02201     3.04   0.003     59.03674     281.534
+------------------------------------------------------------------------------
+
+```
+
+<p>When ez is added to the regression, its coefficient is about −.508 (se ≈ .146). EZ decreases the unemplyment claims by: </p>
+
+$$100(1-e^{-0.508}) = 39.82%$$
+
+
+3. Use the data in HSEINV for this exercise.
+
+* Find the first order autocorrelation in log(invpc) and log(price) respectively. Which of the two series may have a unit root?
+
+```{STATA}
+. use "C:\Users\hxd220000\Desktop\Data Sets- STATA\HSEINV.DTA" 
+
+. reg linvpc linvpc_1
+
+      Source |       SS           df       MS      Number of obs   =        41
+-------------+----------------------------------   F(1, 39)        =     26.93
+       Model |  .461020733         1  .461020733   Prob > F        =    0.0000
+    Residual |  .667603589        39  .017118041   R-squared       =    0.4085
+-------------+----------------------------------   Adj R-squared   =    0.3933
+       Total |  1.12862432        40  .028215608   Root MSE        =    .13084
+
+------------------------------------------------------------------------------
+      linvpc | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    linvpc_1 |   .6340041   .1221684     5.19   0.000     .3868952    .8811129
+       _cons |  -.2323534   .0846844    -2.74   0.009    -.4036437   -.0610631
+------------------------------------------------------------------------------
+```
+
+<p>The first order autocorrelation for <i>log(invpc)</i> is 0.634.</p>
+
+
+
+```{STATA}
+. reg lprice lprice_1
+
+      Source |       SS           df       MS      Number of obs   =        41
+-------------+----------------------------------   F(1, 39)        =    354.55
+       Model |  .138389375         1  .138389375   Prob > F        =    0.0000
+    Residual |  .015222652        39  .000390324   R-squared       =    0.9009
+-------------+----------------------------------   Adj R-squared   =    0.8984
+       Total |  .153612026        40  .003840301   Root MSE        =    .01976
+
+------------------------------------------------------------------------------
+      lprice | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    lprice_1 |    .933914   .0495985    18.83   0.000     .8335916    1.034236
+       _cons |  -.0017658   .0056471    -0.31   0.756     -.013188    .0096565
+------------------------------------------------------------------------------
+```
+
+* Based on your findings in part (i), estimate the equation below and report the results in standard form. Interpret the coefficient $β\hat_1$ and determine whether it is statistically significant.
+
+$$log⁡(invpc_t)=β_0+β_1 \times Δlog⁡(price_t )+β_2 \times t+u_t$$
+
+
+
+<p>Answer here</p>
+
 
 * Now use Δlog⁡(invpc_t) as the dependent variable. Re-run the equation and report the results in standard form. How do your results of the coefficient β ̂_1 change from part (ii)? Is the time trend still significant? Why or why not?
 
-<p> Answer here </p>
-
+<p> We must assume that around the time of EZ designation there were not other external factors that caused a shift down in the trend of log(uclms). We have controlled for a time trend and seasonality, but this may not be enough. </p>
 
 4. Recall that in the example of testing Efficient Markets Hypothesis, it may be that the expected value of the return at time t, given past returns, is a quadratic function of $return_{t-1}$. 
 
