@@ -430,14 +430,57 @@ where $Δinf_t=inf_t-inf_{t-1}$
 
 * Estimate this equation by OLS and report the results in the usual form. In estimating this equation by OLS, we assumed that the supply shock, et, was uncorrelated with unemt. If this is false, what can be said about the OLS estimator of β1?
 
-<p> Answer here </p>
+```{STATA}
+
+. reg cinf unem
+
+      Source |       SS           df       MS      Number of obs   =        55
+-------------+----------------------------------   F(1, 53)        =      6.13
+       Model |  32.6324798         1  32.6324798   Prob > F        =    0.0165
+    Residual |  282.055894        53  5.32180932   R-squared       =    0.1037
+-------------+----------------------------------   Adj R-squared   =    0.0868
+       Total |  314.688374        54  5.82756247   Root MSE        =    2.3069
+
+------------------------------------------------------------------------------
+        dinf | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        unem |  -.5176487    .209045    -2.48   0.017    -.9369398   -.0983576
+       _cons |   2.828202   1.224871     2.31   0.025     .3714212    5.284982
+------------------------------------------------------------------------------
+
+```
+
+<p>We obtain the following equation by running a regression as follows: </p>
+
+$$ Δinf_t= 2.83 -0.518 \times unem_t+e_t $$
+
+<p> If <i>e_t</i> is correlated with <i>unem_t</i>, then the estimator for β1 would be biased and inconsistent.</p>
 
 * Suppose that et is unpredictable given all past information: $E(e_t│inf_(t-1),unem_(t-1),…)=0$. Explain why this makes $unem_t-1$ a good IV candidate for $unem_t$.
 
-<p> Answer here </p>
+<p> Assuming e_t is unpredictable, we can choose unme_t-1 as it  correlated with the endogenous variable unem_t, but not to e_t. therefore, it can serve as IV for unem_t. As it satisfies the E(et/unem_t-1)=0, we can conclude that unem_t-1 is not correlated to e_t. By using unem_t-1 as an IV for unem_t in the regression, we can obtain consistent estimates of the causal effect of unem_t on dinf, even if unem_t is endogenous.</p>
 
 * Does $unem_t-1$ satisfy the instrument relevance assumption? [Hint: You need to run a regression to answer this question.]
 
-<p> Answer here </p>
+```{STATA}
+. reg unem unem_1
+
+      Source |       SS           df       MS      Number of obs   =        55
+-------------+----------------------------------   F(1, 53)        =     69.12
+       Model |  68.9295284         1  68.9295284   Prob > F        =    0.0000
+    Residual |  52.8515619        53   .99719928   R-squared       =    0.5660
+-------------+----------------------------------   Adj R-squared   =    0.5578
+       Total |   121.78109        54  2.25520538   Root MSE        =     .9986
+
+------------------------------------------------------------------------------
+        unem | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      unem_1 |   .7423824   .0892927     8.31   0.000     .5632839    .9214809
+       _cons |   1.489685   .5202033     2.86   0.006      .446289     2.53308
+------------------------------------------------------------------------------
+
+```
+
+<p> As we can see that p-value of the unem_1 is below the threshold, we can conclude that the unem_t-1 is strongly correlated with unem_t and satisfies the assumption.  </p>
 
 * Estimate the expectations augmented Phillips curve by 2SLS using $unem_t-1$ as an IV for $unem_t$. Report the results in the usual form and compare them with the OLS estimates from (i).
