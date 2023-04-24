@@ -399,7 +399,26 @@ $$ p-value_{one-tailed} = \frac {p-value_{two-tailed}} {2} = \frac {0.215} {2} =
 
 * Why is the coefficient on $log(dist)$ positive and statistically significant in part (ii) but not in part (iii)? What does this say about the controls used in part (iii)?
 
-<p> Answer here </p>
+<p>We can see that in the first model, the coefficient of dist is statistically significant, where it is insignificant in the second model. This is due to the absense of these additional factor. To ensure they are jointly significant, we can perform the Wald's test.</p>
+
+```{STATA}
+
+. test age agesq rooms baths lintst lland larea
+
+ ( 1)  age = 0
+ ( 2)  agesq = 0
+ ( 3)  rooms = 0
+ ( 4)  baths = 0
+ ( 5)  lintst = 0
+ ( 6)  lland = 0
+ ( 7)  larea = 0
+
+       F(  7,   310) =   81.35
+            Prob > F =    0.0000
+
+````
+
+<p>As the p-value of the test is lesser than the threshold, we can conclude they are jointly significant. </p>
 
 6. Use the data in PHILLIPS for this exercise. As we mentioned in Lecture 7, instead of the static Phillips curve model, we can estimate an expectations-augmented Phillips curve of the form
 
