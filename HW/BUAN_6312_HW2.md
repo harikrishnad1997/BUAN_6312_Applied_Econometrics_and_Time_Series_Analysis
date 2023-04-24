@@ -484,3 +484,5 @@ $$ Δinf_t= 2.83 -0.518 \times unem_t+e_t $$
 <p> As we can see that p-value of the unem_1 is below the threshold, we can conclude that the unem_t-1 is strongly correlated with unem_t and satisfies the assumption.  </p>
 
 * Estimate the expectations augmented Phillips curve by 2SLS using $unem_t-1$ as an IV for $unem_t$. Report the results in the usual form and compare them with the OLS estimates from (i).
+
+<p></p>
