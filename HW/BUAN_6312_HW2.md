@@ -277,7 +277,7 @@ Time variable: year, 1947 to 1988
 
 <p>As the correlation coefficient is high, we can assume they both have a unit root.</p>
 
-* Based on your findings in part (i), estimate the equation below and report the results in standard form. Interpret the coefficient $β\hat_1$ and determine whether it is statistically significant.
+* Based on your findings in part (i), estimate the equation below and report the results in standard form. Interpret the coefficient β_1 and determine whether it is statistically significant.
 
 $$
 log⁡(invpc_t) = β_0+β_1 \times \Delta log⁡(price_t)+β_2 \times t+u_t
