@@ -38,7 +38,19 @@ $$
 ecobuy = 0.4236865 + -0.8026219 \times ecoprc + 0.7192675 \times regprc + 0.0005518 \times faminc + 0.0238227 \times hhsize + 0.0247849 \times educ - 0.0005008 \times age + u
 $$
 
-<p> From the following equation, we can see that coefficients of <i>ecoprc</i> and <i>regprc</i> are <i>0.803</i> and <i>0.719</i>. The p-values of these coefficients are less than 0.05, therefore they are statistically significant. </p>
+<p> From the following equation, we can see that coefficients of <i>ecoprc</i> and <i>regprc</i> are <i>0.803</i> and <i>0.719</i>. The p-values of these coefficients are less than 0.05, therefore they are statistically significant. We can also conclude that </p>
+
+$$
+\frac {\Delta ecoprc} {\Delta ecobuy} = -0.8026219
+$$
+
+<p> i.e. One dollar increase in price of ecolabeled apples results in a decrease in probablity of a purchase of ecobuy apples by 0.80 </p>
+
+$$
+\frac {\Delta regprc} {\Delta ecobuy} = 0.7192675
+$$
+
+<p> i.e. One dollar increase in price of regular apples results in a increase in probablity of a purchase of ecobuy apples by 0.71 </p>
 
 ```{STATA}
 
@@ -233,42 +245,37 @@ $$
 ```{STATA}
 . use "C:\Users\hxd220000\Desktop\Data Sets- STATA\HSEINV.DTA" 
 
-. reg linvpc linvpc_1
+. tsset year
 
-      Source |       SS           df       MS      Number of obs   =        41
--------------+----------------------------------   F(1, 39)        =     26.93
-       Model |  .461020733         1  .461020733   Prob > F        =    0.0000
-    Residual |  .667603589        39  .017118041   R-squared       =    0.4085
--------------+----------------------------------   Adj R-squared   =    0.3933
-       Total |  1.12862432        40  .028215608   Root MSE        =    .13084
+Time variable: year, 1947 to 1988
+        Delta: 1 unit
 
-------------------------------------------------------------------------------
-      linvpc | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
--------------+----------------------------------------------------------------
-    linvpc_1 |   .6340041   .1221684     5.19   0.000     .3868952    .8811129
-       _cons |  -.2323534   .0846844    -2.74   0.009    -.4036437   -.0610631
-------------------------------------------------------------------------------
+. corr linvpc linvpc_1
+(obs=41)
+
+             |   linvpc linvpc_1
+-------------+------------------
+      linvpc |   1.0000
+    linvpc_1 |   0.6391   1.0000
+
 ```
 
-<p>The first order autocorrelation for <i>log(invpc)</i> is 0.634. </p>
+<p>The first order autocorrelation for <i>log(invpc)</i> is 0.6391. </p>
 
 ```{STATA}
-. reg lprice lprice_1
+. corr lprice lprice_1
+(obs=41)
 
-      Source |       SS           df       MS      Number of obs   =        41
--------------+----------------------------------   F(1, 39)        =    354.55
-       Model |  .138389375         1  .138389375   Prob > F        =    0.0000
-    Residual |  .015222652        39  .000390324   R-squared       =    0.9009
--------------+----------------------------------   Adj R-squared   =    0.8984
-       Total |  .153612026        40  .003840301   Root MSE        =    .01976
+             |   lprice lprice_1
+-------------+------------------
+      lprice |   1.0000
+    lprice_1 |   0.9492   1.0000
 
-------------------------------------------------------------------------------
-      lprice | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
--------------+----------------------------------------------------------------
-    lprice_1 |    .933914   .0495985    18.83   0.000     .8335916    1.034236
-       _cons |  -.0017658   .0056471    -0.31   0.756     -.013188    .0096565
-------------------------------------------------------------------------------
 ```
+
+<p>The first order autocorrelation for <i>log(price)</i> is 0.9492.</p>
+
+<p>As the correlation coefficient is high, we can assume they both have a unit root.</p>
 
 * Based on your findings in part (i), estimate the equation below and report the results in standard form. Interpret the coefficient $β\hat_1$ and determine whether it is statistically significant.
 
@@ -276,11 +283,51 @@ $$
 log⁡(invpc_t) = β_0+β_1 \times \Delta log⁡(price_t)+β_2 \times t+u_t
 $$
 
-<p>Answer here</p>
+```{STATA}
+
+. reg linvpc gprice t
+
+      Source |       SS           df       MS      Number of obs   =        41
+-------------+----------------------------------   F(2, 38)        =     19.77
+       Model |  .575457228         2  .287728614   Prob > F        =    0.0000
+    Residual |  .553167094        38  .014557029   R-squared       =    0.5099
+-------------+----------------------------------   Adj R-squared   =    0.4841
+       Total |  1.12862432        40  .028215608   Root MSE        =    .12065
+
+------------------------------------------------------------------------------
+      linvpc | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      gprice |   3.878646   .9579971     4.05   0.000     1.939282     5.81801
+           t |    .008037   .0015952     5.04   0.000     .0048077    .0112664
+       _cons |  -.8532545    .040291   -21.18   0.000    -.9348193   -.7716897
+------------------------------------------------------------------------------
+
+```
+
+<p>We can see that the co-efficient of gprice is statistically significant. This implies that 1% growth of price results in 3.87% increase in per capita in the housing investment above it mean value.</p>
 
 * Now use Δlog⁡(invpc_t) as the dependent variable. Re-run the equation and report the results in standard form. How do your results of the coefficient β ̂_1 change from part (ii)? Is the time trend still significant? Why or why not?
 
-<p> We must assume that around the time of EZ designation there were not other external factors that caused a shift down in the trend of log(uclms). We have controlled for a time trend and seasonality, but this may not be enough. </p>
+```{STATA}
+. reg ginvpc gprice t
+
+      Source |       SS           df       MS      Number of obs   =        41
+-------------+----------------------------------   F(2, 38)        =      0.95
+       Model |  .039000234         2  .019500117   Prob > F        =    0.3968
+    Residual |  .782237921        38  .020585208   R-squared       =    0.0475
+-------------+----------------------------------   Adj R-squared   =   -0.0026
+       Total |  .821238155        40  .020530954   Root MSE        =    .14348
+
+------------------------------------------------------------------------------
+      ginvpc | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      gprice |   1.566526   1.139214     1.38   0.177    -.7396933    3.872745
+           t |    .000037    .001897     0.02   0.985    -.0038032    .0038772
+       _cons |   .0059315   .0479125     0.12   0.902    -.0910623    .1029253
+------------------------------------------------------------------------------
+
+```
+<p> We see that the co-efficient is 1.567 and is not statistically significant. The time trend is not significant at 5% level of significance as the p value is 0.902. </p>
 
 4. Recall that in the example of testing Efficient Markets Hypothesis, it may be that the expected value of the return at time t, given past returns, is a quadratic function of $return_{t-1}$.
 
@@ -318,9 +365,11 @@ If building the incinerator reduces the value of homes closer to the site, what 
 
 <p>Assuming all the other variables remain constant, we can conlcude that cost of home is positively correlated to the distance from the incinerator. Therefore,</p>
 
-$$ \delta_{1} > 0 $$
+$$
+\delta_{1} > 0
+$$
 
-<p>Assuming β1 > 0, We can assume the distance between the expensive houses and the incinerator is large.</p> 
+<p>Assuming β1 > 0, We can assume the distance between the expensive houses and the incinerator is large.</p>
 
 * Estimate the model from part (i) and report the results in the usual form. Interpret the coefficient on $y_81⋅log⁡(dist)$. What do you conclude?
 
@@ -350,9 +399,13 @@ $$ \delta_{1} > 0 $$
 
 <p> From our analysis, we get the following equation:</p>
 
-$$ \hat{lprice}  = 8.06 - 0.0113\times y81 + 0.317ldist + 0.0481 \times y81 \times ldist$$
+$$
+\hat{lprice}  = 8.06 - 0.0113\times y81 + 0.317ldist + 0.0481 \times y81 \times ldist
+$$
 
-$$ n = 321, R^2 = 0.3958, Adj R^2 = 0.3901$$
+$$
+n = 321, R^2 = 0.3958, Adj R^2 = 0.3901
+$$
 
 <p>We see that  δ1 = 0.0481862, but the p-value > 0.05. So, it is not statistically significant.</p>
 
@@ -389,11 +442,17 @@ $$ n = 321, R^2 = 0.3958, Adj R^2 = 0.3901$$
 
 <p> We can see that δ1 =  0.0624668 with a p-value = 0.215. As the summary of the regression output conducts a two-tailed test, we can assume for the one tailed test</p>
 
-$$ H_0 : \delta _1 =0 $$
+$$
+H_0 : \delta _1 =0
+$$
 
-$$ H_1: \delta _1 > 0 $$
+$$
+H_1: \delta _1 > 0
+$$
 
-$$ p-value_{one-tailed} = \frac {p-value_{two-tailed}} {2} = \frac {0.215} {2} = 0.107 $$
+$$
+p-value_{one-tailed} = \frac {p-value_{two-tailed}} {2} = \frac {0.215} {2} = 0.107
+$$
 
 <p> As the p-value > 0.05, we can conclude that the distance from the incinerator is not affecting the price of the houses. </p>
 
@@ -416,7 +475,7 @@ $$ p-value_{one-tailed} = \frac {p-value_{two-tailed}} {2} = \frac {0.215} {2} =
        F(  7,   310) =   81.35
             Prob > F =    0.0000
 
-````
+```
 
 <p>As the p-value of the test is lesser than the threshold, we can conclude they are jointly significant. </p>
 
@@ -452,7 +511,9 @@ where $Δinf_t=inf_t-inf_{t-1}$
 
 <p>We obtain the following equation by running a regression as follows: </p>
 
-$$ Δinf_t= 2.83 -0.518 \times unem_t+e_t $$
+$$
+Δinf_t= 2.83 -0.518 \times unem_t+e_t
+$$
 
 <p> If <i>e_t</i> is correlated with <i>unem_t</i>, then the estimator for β1 would be biased and inconsistent.</p>
 
@@ -484,5 +545,52 @@ $$ Δinf_t= 2.83 -0.518 \times unem_t+e_t $$
 <p> As we can see that p-value of the unem_1 is below the threshold, we can conclude that the unem_t-1 is strongly correlated with unem_t and satisfies the assumption.  </p>
 
 * Estimate the expectations augmented Phillips curve by 2SLS using $unem_t-1$ as an IV for $unem_t$. Report the results in the usual form and compare them with the OLS estimates from (i).
+
+<p><b> IV Model</b></p>
+
+```{STATA}
+
+. ivreg cinf unem
+
+Instrumental variables 2SLS regression
+
+      Source |       SS           df       MS      Number of obs   =        55
+-------------+----------------------------------   F(1, 53)        =      6.13
+       Model |  32.6324798         1  32.6324798   Prob > F        =    0.0165
+    Residual |  282.055894        53  5.32180932   R-squared       =    0.1037
+-------------+----------------------------------   Adj R-squared   =    0.0868
+       Total |  314.688374        54  5.82756247   Root MSE        =    2.3069
+
+------------------------------------------------------------------------------
+        cinf | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        unem |  -.5176487    .209045    -2.48   0.017    -.9369398   -.0983576
+       _cons |   2.828202   1.224871     2.31   0.025     .3714212    5.284982
+------------------------------------------------------------------------------
+(no endogenous regressors)
+
+```
+
+<p><b> OLS Model</b></p>
+
+```{STATA}
+
+. reg cinf unem
+
+      Source |       SS           df       MS      Number of obs   =        55
+-------------+----------------------------------   F(1, 53)        =      6.13
+       Model |  32.6324798         1  32.6324798   Prob > F        =    0.0165
+    Residual |  282.055894        53  5.32180932   R-squared       =    0.1037
+-------------+----------------------------------   Adj R-squared   =    0.0868
+       Total |  314.688374        54  5.82756247   Root MSE        =    2.3069
+
+------------------------------------------------------------------------------
+        cinf | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        unem |  -.5176487    .209045    -2.48   0.017    -.9369398   -.0983576
+       _cons |   2.828202   1.224871     2.31   0.025     .3714212    5.284982
+------------------------------------------------------------------------------
+
+```
 
 <p></p>
