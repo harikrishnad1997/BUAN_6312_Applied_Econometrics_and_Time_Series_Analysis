@@ -26,7 +26,6 @@
 
 ```
 
-
 * Estimate the linear probability model below and and report the results in the usual form. Carefully interpret the coefficients on the price variables (*ecoprc* and  *regprc* ).
 
 $$
@@ -35,7 +34,9 @@ $$
 
 <p> We get the LRM equation as follows:</p>
 
-$$ ecobuy = 0.4236865 + -0.8026219 \times ecoprc + 0.7192675 \times regprc + 0.0005518 \times faminc + 0.0238227 \times hhsize + 0.0247849 \times educ - 0.0005008 \times age + u $$
+$$
+ecobuy = 0.4236865 + -0.8026219 \times ecoprc + 0.7192675 \times regprc + 0.0005518 \times faminc + 0.0238227 \times hhsize + 0.0247849 \times educ - 0.0005008 \times age + u
+$$
 
 <p> From the following equation, we can see that coefficients of <i>ecoprc</i> and <i>regprc</i> are <i>0.803</i> and <i>0.719</i>. The p-values of these coefficients are less than 0.05, therefore they are statistically significant. </p>
 
@@ -64,7 +65,6 @@ $$ ecobuy = 0.4236865 + -0.8026219 \times ecoprc + 0.7192675 \times regprc + 0.0
 
 ```
 
-
 * Are the nonprice variables jointly significant in the LPM? (Use the usual F statistic, even though it is not valid when there is heteroskedasticity.) Which explanatory variable other than the price variables seems to have the most significant effect on the decision to buy ecolabeled apples? Does this make sense to you?
 
 <p> We can see that we conduct a hypothesis tests on the non price variables gives us a <i>p_value < 0.05</i>. Therefore, we can reject the null hypothesis i.e. non-price variables are jointly significant. As <i>t(educ) = 2.96</i> is the highest t statistic value among the non price variable, we can conclude that <i>education</i> makes most significant effect on purchase of eco-labeled apples. This makes sense that educated customers would prefer ecolabeled apples as they would be more well equipped in understanding the benefit of the consumption of them.</p>
@@ -82,7 +82,6 @@ $$ ecobuy = 0.4236865 + -0.8026219 \times ecoprc + 0.7192675 \times regprc + 0.0
             Prob > F =    0.0015
 
 ```
-
 
 * In the model from part (ii), replace $faminc$ with $log(faminc)$. Given the $R^2$, which model fits the data better? How many estimated probabilities are negative? How many are bigger than one? Should you be concerned? [Hint: Use command predict y to generate fitted values.]
 
@@ -115,7 +114,7 @@ $$ ecobuy = 0.4236865 + -0.8026219 \times ecoprc + 0.7192675 \times regprc + 0.0
 
 <p>We see that the <i>Adj-R sqr</i> of the second model is greater in the first model. This indicates that the second model fits better. In the second model, there are two fitted probabilities are above 1 and in the range of 0.185 to 1.051. The two values aren't of concern as the source has 660 observations and the values are very close to 1. There are no negative probabilities.</p>
 
-2. Use the data in EZANDERS for this exercise. The data are on monthly unemployment claims in Anderson Township in Indiana, from January 1980 through November 1988. In 1984, an enterprise zone (EZ) was located in Anderson (as well as other cities in Indiana). 
+2. Use the data in EZANDERS for this exercise. The data are on monthly unemployment claims in Anderson Township in Indiana, from January 1980 through November 1988. In 1984, an enterprise zone (EZ) was located in Anderson (as well as other cities in Indiana).
 
 * Regress log(uclms) on a monthly linear time trend and 11 monthly dummy variables. [Hint: Use jan as the base month for the monthly dummy variables.]What was the overall trend in unemployment claims over this period? (Interpret the coefficient on the time trend.) Is there evidence of seasonality in unemployment claims?
 
@@ -158,8 +157,13 @@ $$ ecobuy = 0.4236865 + -0.8026219 \times ecoprc + 0.7192675 \times regprc + 0.0
 
 <p>To confirm the joint significance, we perform the Wald test on the 11 monthly dummy variables. </p>
 
-$$H_0: {feb - dec} = 0$$
-$$H_1: {feb - dec} \neq 0$$
+$$
+H_0: {feb - dec} = 0
+$$
+
+$$
+H_1: {feb - dec} \neq 0
+$$
 
 ```{STATA}
 . test feb mar apr may jun jul aug sep oct nov dec
@@ -218,8 +222,9 @@ $$H_1: {feb - dec} \neq 0$$
 
 <p>When ez is added to the regression, its coefficient is about −.508 (se ≈ .146). EZ decreases the unemplyment claims by: </p>
 
-$$100(1-e^{-0.508}) = 39.82%$$
-
+$$
+100(1-e^{-0.508}) = 39.82\%
+$$
 
 3. Use the data in HSEINV for this exercise.
 
@@ -245,9 +250,7 @@ $$100(1-e^{-0.508}) = 39.82%$$
 ------------------------------------------------------------------------------
 ```
 
-<p>The first order autocorrelation for <i>log(invpc)</i> is 0.634.</p>
-
-
+<p>The first order autocorrelation for <i>log(invpc)</i> is 0.634. </p>
 
 ```{STATA}
 . reg lprice lprice_1
@@ -269,27 +272,27 @@ $$100(1-e^{-0.508}) = 39.82%$$
 
 * Based on your findings in part (i), estimate the equation below and report the results in standard form. Interpret the coefficient $β\hat_1$ and determine whether it is statistically significant.
 
-$$log⁡(invpc_t)=β_0+β_1 \times Δlog⁡(price_t )+β_2 \times t+u_t$$
-
-
+$$
+log⁡(invpc_t) = β_0+β_1 \times \Delta log⁡(price_t)+β_2 \times t+u_t
+$$
 
 <p>Answer here</p>
-
 
 * Now use Δlog⁡(invpc_t) as the dependent variable. Re-run the equation and report the results in standard form. How do your results of the coefficient β ̂_1 change from part (ii)? Is the time trend still significant? Why or why not?
 
 <p> We must assume that around the time of EZ designation there were not other external factors that caused a shift down in the trend of log(uclms). We have controlled for a time trend and seasonality, but this may not be enough. </p>
 
-4. Recall that in the example of testing Efficient Markets Hypothesis, it may be that the expected value of the return at time t, given past returns, is a quadratic function of $return_{t-1}$. 
+4. Recall that in the example of testing Efficient Markets Hypothesis, it may be that the expected value of the return at time t, given past returns, is a quadratic function of $return_{t-1}$.
 
 * To check this possibility, use the data in NYSE to estimate
 
-$$ return_t=β_0+β_1 return_{t-1}+β_2 return_{t-1}^2+u_t $$
+$$
+return_t=β_0+β_1 return_{t-1}+β_2 return_{t-1}^2+u_t
+$$
 
 report the results in standard form.
 
 <p> Answer here</p>
-
 
 * State and test the null hypothesis that E(return_t |return_(t-1)) does not depend on returnt-1. [Hint: There are two restrictions to test here.] What do you conclude?
 
@@ -307,23 +310,92 @@ report the results in standard form.
 
 * The variable dist is the distance from each home to the incinerator site, in feet. Consider the model
 
-$$ log⁡(price)=β_0+δ_0 y_81 +\beta_1  log⁡(dist)+δ_1 y_81⋅log⁡(dist)+u.$$
+$$
+log⁡(price)=β_0+δ_0 y_{81} +\beta_1  log⁡(dist)+δ_1 y_{81}⋅log⁡(dist)+u.
+$$
 
 If building the incinerator reduces the value of homes closer to the site, what is the sign of δ1? What does it mean if β1 > 0?
 
-<p> Answer here </p>
+<p>Assuming all the other variables remain constant, we can conlcude that cost of home is positively correlated to the distance from the incinerator. Therefore,</p>
 
-* 	Estimate the model from part (i) and report the results in the usual form. Interpret the coefficient on $y_81⋅log⁡(dist)$. What do you conclude?
+$$ \delta_{1} > 0 $$
 
-<p> Answer here </p>
+<p>Assuming β1 > 0, We can assume the distance between the expensive houses and the incinerator is large.</p> 
 
-* What do you conclude about predicting weekly stock returns based on past stock returns?
+* Estimate the model from part (i) and report the results in the usual form. Interpret the coefficient on $y_81⋅log⁡(dist)$. What do you conclude?
 
-<p> Answer here </p>
+```{STATA}
+
+. use "C:\Users\hxd220000\Desktop\Data Sets- STATA\KIELMC.DTA" 
+
+. reg lprice y81 ldist y81ldist
+
+      Source |       SS           df       MS      Number of obs   =       321
+-------------+----------------------------------   F(3, 317)       =     69.22
+       Model |  24.3172548         3  8.10575159   Prob > F        =    0.0000
+    Residual |  37.1217306       317  .117103251   R-squared       =    0.3958
+-------------+----------------------------------   Adj R-squared   =    0.3901
+       Total |  61.4389853       320  .191996829   Root MSE        =     .3422
+
+------------------------------------------------------------------------------
+      lprice | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         y81 |  -.0113101   .8050622    -0.01   0.989     -1.59525     1.57263
+       ldist |    .316689   .0515323     6.15   0.000     .2153005    .4180775
+    y81ldist |   .0481862   .0817929     0.59   0.556    -.1127394    .2091117
+       _cons |   8.058468   .5084358    15.85   0.000     7.058133    9.058803
+--------
+
+```
+
+<p> From our analysis, we get the following equation:</p>
+
+$$ \hat{lprice}  = 8.06 - 0.0113\times y81 + 0.317ldist + 0.0481 \times y81 \times ldist$$
+
+$$ n = 321, R^2 = 0.3958, Adj R^2 = 0.3901$$
+
+<p>We see that  δ1 = 0.0481862, but the p-value > 0.05. So, it is not statistically significant.</p>
 
 * Add $age, age^2, rooms, baths, log(intst), log(land), and log(area)$ to the equation. Now, what do you conclude about the effect of the incinerator on housing values?
 
-<p> Answer here </p>
+```{STATA}
+
+. reg lprice y81 ldist y81ldist age agesq rooms baths lintst lland larea
+
+      Source |       SS           df       MS      Number of obs   =       321
+-------------+----------------------------------   F(10, 310)      =    114.55
+       Model |   48.353762        10   4.8353762   Prob > F        =    0.0000
+    Residual |  13.0852234       310  .042210398   R-squared       =    0.7870
+-------------+----------------------------------   Adj R-squared   =    0.7802
+       Total |  61.4389853       320  .191996829   Root MSE        =    .20545
+
+------------------------------------------------------------------------------
+      lprice | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         y81 |  -.2254466   .4946914    -0.46   0.649    -1.198824    .7479309
+       ldist |   .0009226   .0446168     0.02   0.984    -.0868674    .0887125
+    y81ldist |   .0624668   .0502788     1.24   0.215     -.036464    .1613976
+         age |  -.0080075   .0014173    -5.65   0.000    -.0107962   -.0052187
+       agesq |   .0000357   8.71e-06     4.10   0.000     .0000186    .0000528
+       rooms |   .0461389   .0173442     2.66   0.008     .0120117    .0802662
+       baths |   .1010478   .0278224     3.63   0.000     .0463032    .1557924
+      lintst |  -.0599757   .0317217    -1.89   0.060    -.1223929    .0024414
+       lland |   .0953425   .0247252     3.86   0.000      .046692     .143993
+       larea |   .3507429   .0519485     6.75   0.000     .2485266    .4529592
+       _cons |   7.673854   .5015718    15.30   0.000     6.686938    8.660769
+------------------------------------------------------------------------------
+
+```
+
+<p> We can see that δ1 =  0.0624668 with a p-value = 0.215. As the summary of the regression output conducts a two-tailed test, we can assume for the one tailed test</p>
+
+$$ H_0 : \delta _1 =0 $$
+
+$$ H_1: \delta _1 > 0 $$
+
+$$ p-value_{one-tailed} = \frac {p-value_{two-tailed}} {2} = \frac {0.215} {2} = 0.107 $$
+
+<p> As the p-value > 0.05, we can conclude that the distance from the incinerator is not affecting the price of the houses. </p>
 
 * Why is the coefficient on $log(dist)$ positive and statistically significant in part (ii) but not in part (iii)? What does this say about the controls used in part (iii)?
 
@@ -331,7 +403,9 @@ If building the incinerator reduces the value of homes closer to the site, what 
 
 6. Use the data in PHILLIPS for this exercise. As we mentioned in Lecture 7, instead of the static Phillips curve model, we can estimate an expectations-augmented Phillips curve of the form
 
-$$ Δinf_t=β_0+β_1 unem_t+e_t $$
+$$
+Δinf_t=β_0+β_1 unem_t+e_t
+$$
 
 where $Δinf_t=inf_t-inf_{t-1}$
 
@@ -339,7 +413,7 @@ where $Δinf_t=inf_t-inf_{t-1}$
 
 <p> Answer here </p>
 
-* 	Suppose that et is unpredictable given all past information: $E(e_t│inf_(t-1),unem_(t-1),…)=0$. Explain why this makes $unem_t-1$ a good IV candidate for $unem_t$.
+* Suppose that et is unpredictable given all past information: $E(e_t│inf_(t-1),unem_(t-1),…)=0$. Explain why this makes $unem_t-1$ a good IV candidate for $unem_t$.
 
 <p> Answer here </p>
 
