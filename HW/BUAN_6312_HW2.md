@@ -42,6 +42,7 @@ $$
 
 $$
 \frac {\Delta ecoprc} {\Delta ecobuy} = -0.8026219
+
 $$
 
 <p> i.e. One dollar increase in price of ecolabeled apples results in a decrease in probablity of a purchase of ecobuy apples by 0.80 </p>
@@ -327,6 +328,7 @@ $$
 ------------------------------------------------------------------------------
 
 ```
+
 <p> We see that the co-efficient is 1.567 and is not statistically significant. The time trend is not significant at 5% level of significance as the p value is 0.902. </p>
 
 4. Recall that in the example of testing Efficient Markets Hypothesis, it may be that the expected value of the return at time t, given past returns, is a quadratic function of $return_{t-1}$.
