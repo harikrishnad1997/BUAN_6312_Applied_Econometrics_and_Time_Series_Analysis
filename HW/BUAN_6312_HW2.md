@@ -172,13 +172,9 @@ $$ \frac {\Delta regprc} {\Delta ecobuy} = 0.7192675 $$
 
 <p>To confirm the joint significance, we perform the Wald test on the 11 monthly dummy variables. </p>
 
-$$
-H_0: {feb - dec} = 0
-$$
+$$ H_0: {feb - dec} = 0 $$
 
-$$
-H_1: {feb - dec} \neq 0
-$$
+$$ H_1: {feb - dec} \neq 0 $$
 
 ```{STATA}
 . test feb mar apr may jun jul aug sep oct nov dec
@@ -237,9 +233,11 @@ $$
 
 <p>When ez is added to the regression, its coefficient is about −.508 (se ≈ .146). EZ decreases the unemplyment claims by: </p>
 
-$$
-100(1-e^{-0.508}) = 39.82\%
-$$
+$$ 100(1-e^{-0.508}) = 39.82\% $$
+
+* What assumptions do you need to make to attribute the effect in part (ii) to the creation of an EZ?
+
+<p>We must assume that around the time of EZ designation there were not other external factors that caused a shift down in the trend of log(uclms). We have controlled for a time trend and seasonality, but this may not be enough.</p>
 
 3. Use the data in HSEINV for this exercise.
 
