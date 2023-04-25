@@ -341,19 +341,90 @@ $$
 
 report the results in standard form.
 
-<p> Answer here</p>
+```{STATA}
+. reg return return_1 return_1_2
+
+      Source |       SS           df       MS      Number of obs   =       689
+-------------+----------------------------------   F(2, 686)       =      2.16
+       Model |  19.2169743         2  9.60848717   Prob > F        =    0.1161
+    Residual |  3051.20782       686   4.4478248   R-squared       =    0.0063
+-------------+----------------------------------   Adj R-squared   =    0.0034
+       Total |  3070.42479       688  4.46282673   Root MSE        =     2.109
+
+------------------------------------------------------------------------------
+      return | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    return_1 |   .0485723   .0387224     1.25   0.210    -.0274563    .1246009
+  return_1_2 |   -.009735   .0070296    -1.38   0.167     -.023537     .004067
+       _cons |   .2255486    .087234     2.59   0.010     .0542708    .3968263
+------------------------------------------------------------------------------
+
+```
+
+<p> We can see both estimates are not statistically significant at 5%.</p>
 
 * State and test the null hypothesis that E(return_t |return_(t-1)) does not depend on returnt-1. [Hint: There are two restrictions to test here.] What do you conclude?
 
-<p> Answer here </p>
+$$ H_0: \beta _1 = 0 \hspace{1cm} \beta _2 = 0 $$
+
+```{STATA}
+
+. test return_1 return_1_2
+
+ ( 1)  return_1 = 0
+ ( 2)  return_1_2 = 0
+
+       F(  2,   686) =    2.16
+            Prob > F =    0.1161
+
+```
+<p> We need to satisfy the above null for our hypothesis to be satisfied. As the p value > 0.05, we cannot reject the nnull hypothesis.</p>
 
 * Drop $return_{t-1}^2$ from the model, but add the interaction term $return_{t-1} \times return_{t-2}$. Now test the efficient markets hypothesis. [Hint: stata can create lag (or lead) variables using subscripts conveniently. For example, you can use the command gen return_2 = return[_n-2] to create $return_{t-2}$ fast.]
 
-<p> Answer here </p>
+```{STATA}
+
+. gen return_2 = return[_n-2]
+(3 missing values generated)
+
+. gen return_2_1 = return_1*return_2
+(3 missing values generated)
+
+. reg return return_1 return_2_1
+
+      Source |       SS           df       MS      Number of obs   =       688
+-------------+----------------------------------   F(2, 685)       =      1.80
+       Model |  16.0639248         2  8.03196242   Prob > F        =    0.1658
+    Residual |  3053.36998       685  4.45747442   R-squared       =    0.0052
+-------------+----------------------------------   Adj R-squared   =    0.0023
+       Total |   3069.4339       687   4.4678805   Root MSE        =    2.1113
+
+------------------------------------------------------------------------------
+      return | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    return_1 |   .0687116   .0392472     1.75   0.080    -.0083476    .1457709
+  return_2_1 |   .0113384   .0100134     1.13   0.258    -.0083222     .030999
+       _cons |   .1731605   .0809626     2.14   0.033     .0141959    .3321251
+------------------------------------------------------------------------------
+
+. test return_1 return_2_1
+
+ ( 1)  return_1 = 0
+ ( 2)  return_2_1 = 0
+
+       F(  2,   685) =    1.80
+            Prob > F =    0.1658
+
+
+```
+
+$$ H_0: \beta _1 = 0 \hspace{1cm} \beta _2 = 0 $$
+
+<p> Since the p value of the Wald test > 0.05, we cannot reject the H0 </p>
 
 * What do you conclude about predicting weekly stock returns based on past stock returns?
 
-<p> Answer here </p>
+<p>As both models look very weak when we look at the R sqr and summary statistics, we cannot predict weekly stock returns from our models. </p>
 
 5. Use the data in KIELMC for this exercise.
 
