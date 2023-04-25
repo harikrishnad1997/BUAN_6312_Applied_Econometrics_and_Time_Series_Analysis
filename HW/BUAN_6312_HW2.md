@@ -590,6 +590,8 @@ $$
 
 <p> If <i>e_t</i> is correlated with <i>unem_t</i>, then the estimator for β1 would be biased and inconsistent.</p>
 
+<p>As the p-value of estimate of unem < 0.05, the estimate is significant at 5%.</p>
+
 * Suppose that et is unpredictable given all past information: $E(e_t│inf_(t-1),unem_(t-1),…)=0$. Explain why this makes $unem_t-1$ a good IV candidate for $unem_t$.
 
 <p> Assuming e_t is unpredictable, we can choose unme_t-1 as it  correlated with the endogenous variable unem_t, but not to e_t. therefore, it can serve as IV for unem_t. As it satisfies the E(et/unem_t-1)=0, we can conclude that unem_t-1 is not correlated to e_t. By using unem_t-1 as an IV for unem_t in the regression, we can obtain consistent estimates of the causal effect of unem_t on dinf, even if unem_t is endogenous.</p>
