@@ -40,16 +40,11 @@ $$
 
 <p> From the following equation, we can see that coefficients of <i>ecoprc</i> and <i>regprc</i> are <i>0.803</i> and <i>0.719</i>. The p-values of these coefficients are less than 0.05, therefore they are statistically significant. We can also conclude that </p>
 
-$$
-\frac {\Delta ecoprc} {\Delta ecobuy} = -0.8026219
-
-$$
+$$ \frac {\Delta ecoprc} {\Delta ecobuy} = -0.8026219 $$
 
 <p> i.e. One dollar increase in price of ecolabeled apples results in a decrease in probablity of a purchase of ecobuy apples by 0.80 </p>
 
-$$
-\frac {\Delta regprc} {\Delta ecobuy} = 0.7192675
-$$
+$$ \frac {\Delta regprc} {\Delta ecobuy} = 0.7192675 $$
 
 <p> i.e. One dollar increase in price of regular apples results in a increase in probablity of a purchase of ecobuy apples by 0.71 </p>
 
