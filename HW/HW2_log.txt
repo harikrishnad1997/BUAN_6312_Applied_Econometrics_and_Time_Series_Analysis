@@ -67,6 +67,15 @@
        _cons |   .3037519   .1789605     1.70   0.090    -.0476555    .6551593
 ------------------------------------------------------------------------------
 
+. predict y
+(option xb assumed; fitted values)
+
+. summarize y
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+           y |        660    .6242424    .1619245   .1854181   1.050653
+
 . use "C:\Users\hxd220000\Desktop\Data Sets- STATA\EZANDERS.DTA" 
 
 . regress luclms year feb mar apr may jun jul aug sep oct nov dec

@@ -116,6 +116,15 @@ $$ \frac {\Delta regprc} {\Delta ecobuy} = 0.7192675 $$
        _cons |   .3037519   .1789605     1.70   0.090    -.0476555    .6551593
 ------------------------------------------------------------------------------
 
+. predict y
+(option xb assumed; fitted values)
+
+. summarize y
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+           y |        660    .6242424    .1619245   .1854181   1.050653
+
 ```
 
 <p>We see that the <i>Adj-R sqr</i> of the second model is greater in the first model. This indicates that the second model fits better. In the second model, there are two fitted probabilities are above 1 and in the range of 0.185 to 1.051. The two values aren't of concern as the source has 660 observations and the values are very close to 1. There are no negative probabilities.</p>
@@ -708,6 +717,16 @@ Instrumented: unem
          age |  -.0003865   .0012517    -0.31   0.758    -.0028444    .0020713
        _cons |   .3037519   .1789605     1.70   0.090    -.0476555    .6551593
 ------------------------------------------------------------------------------
+
+. predict y
+(option xb assumed; fitted values)
+
+. summarize y
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+           y |        660    .6242424    .1619245   .1854181   1.050653
+
 
 . use "C:\Users\hxd220000\Desktop\Data Sets- STATA\EZANDERS.DTA" 
 
