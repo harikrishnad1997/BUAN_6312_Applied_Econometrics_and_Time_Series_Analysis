@@ -618,7 +618,6 @@ $$
 
 ```{STATA}
 
-
 . ivregress 2sls cinf (unem = unem_1)
 
 Instrumental variables 2SLS regression            Number of obs   =         55
