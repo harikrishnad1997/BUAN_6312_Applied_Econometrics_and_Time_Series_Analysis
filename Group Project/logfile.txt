@@ -1,0 +1,413 @@
+
+  ___  ____  ____  ____  ____ ®
+ /__    /   ____/   /   ____/      17.0
+___/   /   /___/   /   /___/       SE—Standard Edition
+
+ Statistics and Data Science       Copyright 1985-2021 StataCorp LLC
+                                   StataCorp
+                                   4905 Lakeway Drive
+                                   College Station, Texas 77845 USA
+                                   800-STATA-PC        https://www.stata.com
+                                   979-696-4600        stata@stata.com
+
+Stata license: 65-user network, expiring  4 Oct 2023
+Serial number: 401709301108
+  Licensed to: Jindal School of Management
+               University of Texas at Dallas
+
+Notes:
+      1. Unicode is supported; see help unicode_advice.
+      2. Maximum number of variables is set to 5,000; see help set_maxvar.
+      3. New update available; type -update all-
+
+Checking for updates...
+(contacting http://www.stata.com)
+
+Update status
+    Last check for updates:  08 May 2023
+    New update available:    08 Mar 2023  (what's new)
+    Current update level:    15 Nov 2022  (what's new)
+
+Comment
+    
+    Stata 18 available
+    
+      Find out more:    stata.com/new-in-stata
+    
+      New features:
+    
+       Bayesian model averaging               Heterogeneous DID
+       Causal mediation analysis              Multilevel meta-analysis
+       Tables of descriptive statistics       Meta-analysis for prevalence
+       Group sequential designs               Local projections for IRFs
+       Robust inference for linear models     Model selection for ARIMA and ARFIMA
+       Wild cluster bootstrap                 Alias variables across frames
+       Flexible demand systems                Frame sets
+       TVCs with interval-censored Cox model  Boost-based regular expressions
+       Lasso for Cox model                    Vectorized numerical integration
+       GOF plots for survival models          Data Editor enhancements
+       RERI                                   Do-file Editor enhancements
+       New spline functions                   New reporting features
+       Corrected and consistent AICs          Graph colors by variable
+       IV fractional probit model             All-new graph style
+       IV quantile regression
+    
+        and more
+
+Possible actions
+
+    Install available updates             (or type -update all-)
+
+Click to edit automatic update checking preferences
+
+. update all
+(contacting http://www.stata.com)
+
+
+. import delimited "C:\Users\hxd220000\Desktop\store-sales-time-series-forecasting\store-sales-time-series-forecasting\store_
+> sales_train.csv"
+(encoding automatically selected: ISO-8859-1)
+(14 vars, 1,714 obs)
+
+. gen date2 = mdy(month,year,day)
+(1,714 missing values generated)
+
+. tsset date2
+
+Time variable: date2, . to .
+        Delta: 1 unit
+
+. gen t = _n
+
+. generate jan = (month == 1)
+
+. generate feb = (month == 2) generate mar = (month == 3) generate apr = (month == 4)
+invalid 'generate' 
+r(198);
+
+. 
+. 
+. 
+.  generate may = (month == 5)
+
+. 
+. 
+. 
+.  generate aug = (month == 8)  generate sep = (month == 9)  generate oct = (month == 10)
+invalid 'generate' 
+r(198);
+
+. 
+. 
+. 
+.  generate nov = (month == 11)  generate dec = (month == 12)
+invalid 'generate' 
+r(198);
+
+. 
+. 
+. 
+.  generate sun = (weekday == 0)
+
+. 
+. 
+. 
+.  generate mon = (weekday == 1)
+
+. 
+. 
+. 
+.  generate tue = (weekday == 2)
+
+. 
+. 
+. 
+.  generate wed = (weekday == 3)
+
+. 
+. 
+. 
+.  generate thu = (weekday == 4)
+
+. 
+. 
+. 
+.  generate fri = (weekday == 5)
+
+. 
+. 
+. 
+.  generate sat = (weekday == 6)
+
+.  generate aug = (month == 8)
+
+. generate sep = (month == 9)
+
+. generate oct = (month == 10)
+
+. generate feb = (month == 2)
+
+. generate mar = (month == 3)
+
+. generate apr = (month == 4)
+
+. table month jan feb mar apr may jun jul aug sep oct nov dec
+variable jun not found
+r(111);
+
+.  generate jun = (month == 6)
+
+. table month jan feb mar apr may jun jul aug sep oct nov dec
+variable jul not found
+r(111);
+
+.  generate jul = (month == 7)
+
+. table month jan feb mar apr may jun jul aug sep oct nov dec
+variable nov not found
+r(111);
+
+.  generate nov = (month == 11)
+
+. generate dec = (month == 12)
+
+. table month jan feb mar apr may jun jul aug sep oct nov dec
+too many variables in layout
+r(103);
+
+. summarize
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+          v1 |      1,714       856.5    494.9335          0       1713
+        date |          0
+       sales |      1,714    639775.2    236163.4   2511.619    1463084
+        week |      1,714    25.30863    14.75481          1         53
+       month |      1,714     6.22287    3.375235          1         12
+-------------+---------------------------------------------------------
+        year |      1,714    2014.842       1.346       2013       2017
+         day |      1,714    15.65694    8.803965          1         31
+     weekday |      1,714    3.008168    2.002025          0          6
+  dcoilwtico |      1,714    63.37954    22.38685      26.19     110.62
+        type |          0
+-------------+---------------------------------------------------------
+      locale |          0
+ locale_name |          0
+ description |          0
+ transferred |      1,714    .0052509    .0722935          0          1
+       date2 |          0
+-------------+---------------------------------------------------------
+           t |      1,714       857.5    494.9335          1       1714
+         jan |      1,714    .0904317     .286883          0          1
+         may |      1,714    .0933489    .2910056          0          1
+         sun |      1,714    .1417736    .3489196          0          1
+         mon |      1,714    .1429405    .3501143          0          1
+-------------+---------------------------------------------------------
+         tue |      1,714    .1423571     .349518          0          1
+         wed |      1,714    .1435239    .3507087          0          1
+         thu |      1,714    .1417736    .3489196          0          1
+         fri |      1,714    .1429405    .3501143          0          1
+         sat |      1,714    .1446908    .3518915          0          1
+-------------+---------------------------------------------------------
+         aug |      1,714    .0810968    .2730635          0          1
+         sep |      1,714    .0700117    .2552411          0          1
+         oct |      1,714    .0723454    .2591345          0          1
+         feb |      1,714    .0822637    .2748463          0          1
+         mar |      1,714    .0904317     .286883          0          1
+-------------+---------------------------------------------------------
+         apr |      1,714    .0886814    .2843664          0          1
+         jun |      1,714    .0939323    .2918197          0          1
+         jul |      1,714    .0939323    .2918197          0          1
+         nov |      1,714    .0705951     .256222          0          1
+         dec |      1,714    .0729288    .2600955          0          1
+
+. regress sales dcoilwtico transferred t feb mar apr may jun jul aug sep oct nov dec tue wed thu fri sat sun
+
+      Source |       SS           df       MS      Number of obs   =     1,714
+-------------+----------------------------------   F(20, 1693)     =    288.34
+       Model |  7.3857e+13        20  3.6928e+12   Prob > F        =    0.0000
+    Residual |  2.1683e+13     1,693  1.2807e+10   R-squared       =    0.7731
+-------------+----------------------------------   Adj R-squared   =    0.7704
+       Total |  9.5539e+13     1,713  5.5773e+10   Root MSE        =    1.1e+05
+
+------------------------------------------------------------------------------
+       sales | Coefficient  Std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+  dcoilwtico |   563.7958   180.7797     3.12   0.002     209.2207     918.371
+ transferred |  -165798.9   38114.83    -4.35   0.000      -240556   -91041.74
+           t |    358.318   7.829325    45.77   0.000     342.9618    373.6742
+         feb |  -51383.62   13178.61    -3.90   0.000    -77231.69   -25535.54
+         mar |  -6791.995   12868.52    -0.53   0.598    -32031.88    18447.89
+         apr |  -37668.74   12970.81    -2.90   0.004    -63109.25   -12228.22
+         may |  -43803.17    12849.6    -3.41   0.001    -69005.93    -18600.4
+         jun |  -41264.83   12892.62    -3.20   0.001    -66551.97   -15977.69
+         jul |  -10024.99   12915.69    -0.78   0.438    -35357.38    15307.41
+         aug |  -59886.18   13323.25    -4.49   0.000    -86017.96    -33754.4
+         sep |   10900.69   13828.78     0.79   0.431    -16222.61    38023.98
+         oct |   2953.251   13721.03     0.22   0.830    -23958.72    29865.22
+         nov |   9760.043    13766.8     0.71   0.478    -17241.69    36761.78
+         dec |   153482.8   13641.35    11.25   0.000     126727.1    180238.4
+         tue |   23971.73   10247.45     2.34   0.019     3872.726    44070.74
+         wed |  -60134.03   10216.89    -5.89   0.000    -80173.09   -40094.97
+         thu |   11478.44   10248.78     1.12   0.263    -8623.164    31580.05
+         fri |   210084.3   10548.74    19.92   0.000     189394.3    230774.2
+         sat |   264501.6   10521.43    25.14   0.000     243865.2    285137.9
+         sun |   48132.33   10248.12     4.70   0.000        28032    68232.65
+       _cons |   235207.3   19972.06    11.78   0.000     196034.8    274379.9
+------------------------------------------------------------------------------
+
+. test mon tue wed thu fri sat
+mon not found
+r(111);
+
+.  generate mon = (weekday == 1)
+variable mon already defined
+r(110);
+
+. test  tue wed thu fri sat sun
+
+ ( 1)  tue = 0
+ ( 2)  wed = 0
+ ( 3)  thu = 0
+ ( 4)  fri = 0
+ ( 5)  sat = 0
+ ( 6)  sun = 0
+
+       F(  6,  1693) =  235.39
+            Prob > F =    0.0000
+
+. test feb mar apr may jun jul aug sep oct nov dec
+
+ ( 1)  feb = 0
+ ( 2)  mar = 0
+ ( 3)  apr = 0
+ ( 4)  may = 0
+ ( 5)  jun = 0
+ ( 6)  jul = 0
+ ( 7)  aug = 0
+ ( 8)  sep = 0
+ ( 9)  oct = 0
+ (10)  nov = 0
+ (11)  dec = 0
+
+       F( 11,  1693) =   31.86
+            Prob > F =    0.0000
+
+. estat hettest
+
+Breusch–Pagan/Cook–Weisberg test for heteroskedasticity 
+Assumption: Normal error terms
+Variable: Fitted values of sales
+
+H0: Constant variance
+
+    chi2(1) =  90.18
+Prob > chi2 = 0.0000
+
+. estat hettest, rhs
+
+Breusch–Pagan/Cook–Weisberg test for heteroskedasticity 
+Assumption: Normal error terms
+Variables: All independent variables
+
+H0: Constant variance
+
+   chi2(20) = 512.13
+Prob > chi2 = 0.0000
+
+. estat bgodfrey
+lags(1) is too large for the number of observations in the sample
+r(198);
+
+. corr
+(date ignored because string variable)
+(type ignored because string variable)
+(locale ignored because string variable)
+(locale_name ignored because string variable)
+(description ignored because string variable)
+no observations
+r(2000);
+
+. predict sales_pred
+(option xb assumed; fitted values)
+
+. gen y_pred = sales - sales_pred
+
+. spearman
+(date ignored because string variable)
+(type ignored because string variable)
+(locale ignored because string variable)
+(locale_name ignored because string variable)
+(description ignored because string variable)
+(obs=0)
+
+             |       v1    sales     week    month     year      day  weekday dcoilw~o transf~d    date2        t      jan
+-------------+------------------------------------------------------------------------------------------------------------
+          v1 |        . 
+       sales |        .        . 
+        week |        .        .        . 
+       month |        .        .        .        . 
+        year |        .        .        .        .        . 
+         day |        .        .        .        .        .        . 
+     weekday |        .        .        .        .        .        .        . 
+  dcoilwtico |        .        .        .        .        .        .        .        . 
+ transferred |        .        .        .        .        .        .        .        .        . 
+       date2 |        .        .        .        .        .        .        .        .        .        . 
+           t |        .        .        .        .        .        .        .        .        .        .        . 
+         jan |        .        .        .        .        .        .        .        .        .        .        .        . 
+         may |        .        .        .        .        .        .        .        .        .        .        .        . 
+         sun |        .        .        .        .        .        .        .        .        .        .        .        . 
+         mon |        .        .        .        .        .        .        .        .        .        .        .        . 
+         tue |        .        .        .        .        .        .        .        .        .        .        .        . 
+         wed |        .        .        .        .        .        .        .        .        .        .        .        . 
+         thu |        .        .        .        .        .        .        .        .        .        .        .        . 
+         fri |        .        .        .        .        .        .        .        .        .        .        .        . 
+         sat |        .        .        .        .        .        .        .        .        .        .        .        . 
+         aug |        .        .        .        .        .        .        .        .        .        .        .        . 
+         sep |        .        .        .        .        .        .        .        .        .        .        .        . 
+         oct |        .        .        .        .        .        .        .        .        .        .        .        . 
+         feb |        .        .        .        .        .        .        .        .        .        .        .        . 
+         mar |        .        .        .        .        .        .        .        .        .        .        .        . 
+         apr |        .        .        .        .        .        .        .        .        .        .        .        . 
+         jun |        .        .        .        .        .        .        .        .        .        .        .        . 
+         jul |        .        .        .        .        .        .        .        .        .        .        .        . 
+         nov |        .        .        .        .        .        .        .        .        .        .        .        . 
+         dec |        .        .        .        .        .        .        .        .        .        .        .        . 
+  sales_pred |        .        .        .        .        .        .        .        .        .        .        .        . 
+      y_pred |        .        .        .        .        .        .        .        .        .        .        .        . 
+
+             |      may      sun      mon      tue      wed      thu      fri      sat      aug      sep      oct      feb
+-------------+------------------------------------------------------------------------------------------------------------
+         may |        . 
+         sun |        .        . 
+         mon |        .        .        . 
+         tue |        .        .        .        . 
+         wed |        .        .        .        .        . 
+         thu |        .        .        .        .        .        . 
+         fri |        .        .        .        .        .        .        . 
+         sat |        .        .        .        .        .        .        .        . 
+         aug |        .        .        .        .        .        .        .        .        . 
+         sep |        .        .        .        .        .        .        .        .        .        . 
+         oct |        .        .        .        .        .        .        .        .        .        .        . 
+         feb |        .        .        .        .        .        .        .        .        .        .        .        . 
+         mar |        .        .        .        .        .        .        .        .        .        .        .        . 
+         apr |        .        .        .        .        .        .        .        .        .        .        .        . 
+         jun |        .        .        .        .        .        .        .        .        .        .        .        . 
+         jul |        .        .        .        .        .        .        .        .        .        .        .        . 
+         nov |        .        .        .        .        .        .        .        .        .        .        .        . 
+         dec |        .        .        .        .        .        .        .        .        .        .        .        . 
+  sales_pred |        .        .        .        .        .        .        .        .        .        .        .        . 
+      y_pred |        .        .        .        .        .        .        .        .        .        .        .        . 
+
+             |      mar      apr      jun      jul      nov      dec sales_~d   y_pred
+-------------+------------------------------------------------------------------------
+         mar |        . 
+         apr |        .        . 
+         jun |        .        .        . 
+         jul |        .        .        .        . 
+         nov |        .        .        .        .        . 
+         dec |        .        .        .        .        .        . 
+  sales_pred |        .        .        .        .        .        .        . 
+      y_pred |        .        .        .        .        .        .        .        . 
+
+. 
